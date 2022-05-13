@@ -35,7 +35,7 @@ with DAG(
     t3 = BashOperator(
         task_id='get note book details',
         depends_on_past=False,
-        bash_command=sleep 5,
+        bash_command='sleep 5',
     )
 
     t4 = BashOperator(
