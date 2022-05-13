@@ -53,7 +53,7 @@ with DAG(
     t6 = BashOperator(
         task_id='Email Status Notification',
         depends_on_past=False,
-        bash_command=sleep 5,
+        bash_command='sleep 5',
     )
 
 
