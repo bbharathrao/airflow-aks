@@ -39,12 +39,12 @@ with DAG(
     )
 
     t4 = BashOperator(
-        task_id='trigger_note_book_(Transform_1)',
+        task_id='trigger_note_book_Transform_1',
         bash_command='date',
     )
 
     t5 = BashOperator(
-        task_id='trigger_note_book_(Transform_2)',
+        task_id='trigger_note_book_Transform_2',
         depends_on_past=False,
         bash_command='sleep 5',
         retries=3,
@@ -64,4 +64,4 @@ with DAG(
     )
 
 
-    t1 >> t2 >> t3 >> t4 >> t5 >> t6
+    t1 >> t2 >> t3 >> t4 >> t5 >> t6 >> t7
