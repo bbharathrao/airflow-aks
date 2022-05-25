@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'ODY-LCB-DEV',
+    'LCB-TS2-DEV',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -13,7 +13,7 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
     },
-    description='LCB Tivoli SChedule 2',
+    description='LCB Tivoli Schedule 2',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
     catchup=False,
