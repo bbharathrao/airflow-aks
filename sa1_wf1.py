@@ -48,7 +48,7 @@ with DAG(
     )
     
     t5 = trigger_dependent_dag = TriggerDagRunOperator(
-        task_id="trigger_dependent_dag",
+        task_id="Trigger-LCB-TS1-DEV",
         trigger_dag_id="dependent-dag",
         wait_for_completion=True
     )
