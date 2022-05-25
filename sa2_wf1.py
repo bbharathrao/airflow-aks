@@ -6,7 +6,7 @@ from airflow.contrib.sensors.file_sensor import FileSensor
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from airflow.operators.sensors import ExternalTaskSensor
+from airflow.sensors.external_task_sensor import ExternalTaskSensor
 
 def my_function():
     return ""
