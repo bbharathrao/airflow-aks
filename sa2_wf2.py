@@ -14,7 +14,7 @@ with DAG(
         'retry_delay': timedelta(minutes=5)
     },
     description='LCB Tivoli Schedule 2',
-    schedule_interval='0 16 * * *',
+    schedule_interval='0 22 * * *',
     start_date=datetime(2021, 1, 1),
     catchup=False,
     tags=['example'],
