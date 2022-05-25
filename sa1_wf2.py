@@ -31,16 +31,12 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='DataStage1',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
+        python_callable= my_function
     )
 
     t3 = PythonOperator(
         task_id='DataStage2',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
+        python_callable= my_function
     )
 
     t4 = DummyOperator(
