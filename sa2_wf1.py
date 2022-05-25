@@ -3,6 +3,9 @@ from textwrap import dedent
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
+def my_function():
+    return ""
+
 with DAG(
     'LCB-TS1-DEV',
     default_args={
