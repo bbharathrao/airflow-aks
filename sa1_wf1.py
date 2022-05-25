@@ -7,6 +7,9 @@ from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
+def my_function():
+    return ""
+
 with DAG(
     'ODY-TS1-DEV',
     default_args={
@@ -31,16 +34,12 @@ with DAG(
 
     t2 = PythonOperator(
         task_id='DataStage1',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
+        python_callable= my_function
     )
 
     t3 = PythonOperator(
         task_id='DataStage2',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
+        python_callable= my_function
     )
 
     t4 = DummyOperator(
