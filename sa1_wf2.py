@@ -29,7 +29,8 @@ with DAG(
 
     t1 = FileSensor(
         task_id='FileWatcher',
-        poke_interval=30
+        poke_interval=30,
+        filepath=''
     )
 
     t2 = PythonOperator(
