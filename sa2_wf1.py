@@ -22,8 +22,21 @@ with DAG(
 
     t1 = FileSensor(
         task_id='FileWatcher',
-        poke_interval=30
+        poke_interval=30,
+        filepath=''
     )
+    
+    t7 = ExternalTaskSensor(
+    task_id='external_task_sensor',
+    poke_interval=60,
+    timeout=180,
+    soft_fail=False,
+    retries=2,
+    external_task_id='task_to_be_sensed',
+    external_dag_id='ODY-TS1-DEV',
+    dag=dag
+    )
+
     
     t2 = PythonOperator(
         task_id='DataStage1',
