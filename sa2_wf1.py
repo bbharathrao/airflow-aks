@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 with DAG(
-    'subject-area-2-work-flow-1',
+    'LCB-TS1-DEV',
     default_args={
         'depends_on_past': False,
         'email': ['airflow@example.com'],
@@ -13,55 +13,43 @@ with DAG(
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
     },
-    description='Subject Area 2 DAG Work Flow 1',
+    description='LCB Tivoli SChedule 1',
     schedule_interval=timedelta(days=1),
     start_date=datetime(2021, 1, 1),
     catchup=False,
     tags=['example'],
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='check_for_source_files',
-        bash_command='date',
+    t1 = FileSensor(
+        task_id='FileWatcher',
+        poke_interval=30
+    )
+    
+    t2 = PythonOperator(
+        task_id='DataStage1',
+        python_callable= my_function
+    )
+    
+    t3 = PythonOperator(
+        task_id='DataStage2',
+        python_callable= my_function
+    )
+    
+    t4 = PythonOperator(
+        task_id='DataStage3',
+        python_callable= my_function
     )
 
-    t2 = BashOperator(
-        task_id='source_schema_check',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
-    )
-
-    t3 = BashOperator(
-        task_id='get_note_book_details',
-        depends_on_past=False,
-        bash_command='sleep 5',
-    )
-
-    t4 = BashOperator(
-        task_id='trigger_note_book_Transform_1',
-        bash_command='date',
-    )
-
-    t5 = BashOperator(
-        task_id='trigger_note_book_Transform_2',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
+    t5 = DummyOperator(
+        task_id='OtherTask',
+        retries=3
     )
 
     t6 = BashOperator(
-        task_id='check_target_schema',
-        depends_on_past=False,
-        bash_command='sleep 5',
-        retries=3,
-    )
-
-    t7 = BashOperator(
-        task_id='Email_Status_Notification',
+        task_id='EmailNotification',
         depends_on_past=False,
         bash_command='sleep 5',
     )
 
 
-    t1 >> t2 >> t3 >> t4 >> t5 >> t6 >> t7
+    t1 >> t2 >> [t3 >> t4] >> t5 >> t6
