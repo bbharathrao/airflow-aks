@@ -50,7 +50,7 @@ with DAG(
 ) as dag:
   
     notebook_task_params = {
-        existing_cluster_id='0516-223556-z0uc5wle'
+        'existing_cluster_id':'0516-223556-z0uc5wle',
         'notebook_task': {
             'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
         },
