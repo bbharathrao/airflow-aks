@@ -50,8 +50,7 @@ with DAG(
 ) as dag:
     new_cluster = {
         'spark_version': '2.1.0-db3-scala2.11',
-        'node_type_id': 'r3.xlarge',
-        'aws_attributes': {'availability': 'ON_DEMAND'},
+        'node_type_id': 'Standard_DS3_v2',
         'num_workers': 2,
     }
 
