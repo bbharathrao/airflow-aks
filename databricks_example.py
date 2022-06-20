@@ -48,21 +48,16 @@ with DAG(
     start_date=days_ago(2),
     tags=['example'],
 ) as dag:
-    new_cluster = {
-        'spark_version': '2.1.0-db3-scala2.11',
-        'node_type_id': 'Standard_DS3_v2',
-        'num_workers': 2,
-    }
-
+  
     notebook_task_params = {
-        'new_cluster': new_cluster,
+        existing_cluster_id='0516-223556-z0uc5wle'
         'notebook_task': {
             'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
         },
     }
     # [START howto_operator_databricks_json]
     # Example of using the JSON parameter to initialize the operator.
-    notebook_task = DatabricksSubmitRunOperator(task_id='notebook_task', json=notebook_task_params)
+#     notebook_task = DatabricksSubmitRunOperator(task_id='notebook_task', json=notebook_task_params)
     # [END howto_operator_databricks_json]
 
     # [START howto_operator_databricks_named]
@@ -70,9 +65,10 @@ with DAG(
     # to initialize the operator.
     spark_jar_task = DatabricksSubmitRunOperator(
         task_id='spark_jar_task',
-        new_cluster=new_cluster,
+        existing_cluster_id='0516-223556-z0uc5wle'
         spark_jar_task={'main_class_name': 'com.example.ProcessData'},
-        libraries=[{'jar': 'dbfs:/lib/etl-0.1.jar'}],
+        libraries=[{'jar': 'dbfs:/FileStore/jars/48af2dc8_a438_42b8_964e_ac132b4bfb96-terajdbc4.jar'}],
     )
     # [END howto_operator_databricks_named]
-    notebook_task >> spark_jar_task
+#     notebook_task >> spark_jar_task
+    spark_jar_task
