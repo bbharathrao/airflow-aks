@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 
 notebook_task = {
-    'existing_cluster_id': 'n-tst09-adbde-cl-001',
+    'existing_cluster_id': '0516-223556-z0uc5wle',
     'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
 }
 
