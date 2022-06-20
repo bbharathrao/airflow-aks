@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 
 notebook_task = {
+    'existing_cluster_id': 'n-tst09-adbde-cl-001',
     'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
 }
 
@@ -26,8 +27,8 @@ with DAG('databricks_dag',
 
     opr_submit_run = DatabricksSubmitRunOperator(
         task_id='submit_run',
-        databricks_conn_id='aa-databricks-test',
-        existing_cluster_id='n-tst09-adbde-cl-001',
+#         databricks_conn_id='aa-databricks-test',
+#         existing_cluster_id='n-tst09-adbde-cl-001',
         notebook_task=notebook_task
     )
 
