@@ -86,6 +86,7 @@ with DAG(
     spark_submit_params = ["--class", "org.apache.spark.examples.SparkPi"]
 
     notebook_run = DatabricksRunNowOperator(
+        task_id='notebook_run_task',
         job_id=job_id,
         notebook_params=notebook_params,
         python_params=python_params,
