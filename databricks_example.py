@@ -93,5 +93,14 @@ with DAG(
         jar_params=jar_params,
         spark_submit_params=spark_submit_params
     )
+
+    notebook_run_2 = DatabricksRunNowOperator(
+        task_id='notebook_run_task_2',
+        job_id=638465510945648,
+        notebook_params=notebook_params,
+        python_params=python_params,
+        jar_params=jar_params,
+        spark_submit_params=spark_submit_params
+    )
     
-    notebook_run
+    notebook_run >> notebook_run_2
