@@ -66,7 +66,7 @@ with DAG(
     spark_jar_task = DatabricksSubmitRunOperator(
         task_id='spark_jar_task',
         existing_cluster_id='0516-223556-z0uc5wle',
-        spark_jar_task={'main_class_name': 'com.example.ProcessData'},
+#         spark_jar_task={'main_class_name': 'com.example.ProcessData'},
         libraries=[{'jar': 'dbfs:/FileStore/jars/48af2dc8_a438_42b8_964e_ac132b4bfb96-terajdbc4.jar'}],
     )
     # [END howto_operator_databricks_named]
