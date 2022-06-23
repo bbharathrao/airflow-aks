@@ -49,12 +49,12 @@ with DAG(
     tags=['example'],
 ) as dag:
   
-    notebook_task_params = {
-        'existing_cluster_id':'0516-223556-z0uc5wle',
-        'notebook_task': {
-            'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
-        },
-    }
+#     notebook_task_params = {
+#         'existing_cluster_id':'0516-223556-z0uc5wle',
+#         'notebook_task': {
+#             'notebook_path': '/Users/211531@corpaa.aa.com/test_sunny',
+#         },
+#     }
     # [START howto_operator_databricks_json]
     # Example of using the JSON parameter to initialize the operator.
 #     notebook_task = DatabricksSubmitRunOperator(task_id='notebook_task', json=notebook_task_params)
@@ -63,12 +63,34 @@ with DAG(
     # [START howto_operator_databricks_named]
     # Example of using the named parameters of DatabricksSubmitRunOperator
     # to initialize the operator.
-    spark_jar_task = DatabricksSubmitRunOperator(
-        task_id='spark_jar_task',
-        existing_cluster_id='0516-223556-z0uc5wle',
-#         spark_jar_task={'main_class_name': 'com.example.ProcessData'},
-        libraries=[{'jar': 'dbfs:/FileStore/jars/48af2dc8_a438_42b8_964e_ac132b4bfb96-terajdbc4.jar'}],
+#     spark_jar_task = DatabricksSubmitRunOperator(
+#         task_id='spark_jar_task',
+#         existing_cluster_id='0516-223556-z0uc5wle',
+# #         spark_jar_task={'main_class_name': 'com.example.ProcessData'},
+#         libraries=[{'jar': 'dbfs:/FileStore/jars/48af2dc8_a438_42b8_964e_ac132b4bfb96-terajdbc4.jar'}],
+#     )
+#     # [END howto_operator_databricks_named]
+# #     notebook_task >> spark_jar_task
+#     spark_jar_task
+    job_id=925227695686083
+
+    notebook_params = {
+        "dry-run": "true",
+        "oldest-time-to-consider": "1457570074236"
+    }
+
+    python_params = ["douglas adams", "42"]
+
+    jar_params = ["douglas adams", "42"]
+
+    spark_submit_params = ["--class", "org.apache.spark.examples.SparkPi"]
+
+    notebook_run = DatabricksRunNowOperator(
+        job_id=job_id,
+        notebook_params=notebook_params,
+        python_params=python_params,
+        jar_params=jar_params,
+        spark_submit_params=spark_submit_params
     )
-    # [END howto_operator_databricks_named]
-#     notebook_task >> spark_jar_task
-    spark_jar_task
+    
+    notebook_run
